@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ukersn's TweakWizard", "Ukersn's TweakWizard.csproj", "{BE6B33C8-6F6B-43EF-948D-B9F679B2A35F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE6B33C8-6F6B-43EF-948D-B9F679B2A35F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE6B33C8-6F6B-43EF-948D-B9F679B2A35F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE6B33C8-6F6B-43EF-948D-B9F679B2A35F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE6B33C8-6F6B-43EF-948D-B9F679B2A35F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {951AC9B1-A82B-407D-B1D4-F29F66714CA5}
+	EndGlobalSection
+EndGlobal
