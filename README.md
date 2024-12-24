@@ -4,21 +4,25 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 ## Features:
 > 1. Allow unrestricted planting of plants and crystals in the garden
 > *  (Default setting is true to enable, you can set EnableUnrestrictedPlanting to false in the configuration file to disable it)
-> 
-> 2. Frame rate optimization
-> *  (Default setting is false to disable, you can set EnableFrameRateOptimization to true in the configuration file to enable it)
-> 
-> Note: This is an experimental feature that may cause game crashes, save corruption, item loss, and other risks.
-> 
-> Enabling it can give you about a 5% increase in game FPS, by reducing the activation display of items in non-adjacent rooms.
 >
-> 3. Extreme frame rate optimization
-> *  (Default setting is false to disable, you can set EnableExtremeFrameRateOptimization to true in the configuration file to enable it)
+> ~~2. Frame rate optimization~~
 > 
-> Note: Only effective when the frame rate optimization option is enabled
+> * This feature(Frame rate optimization) has been removed because it was highly likely to cause save file corruption and was not compatible with other plugins.
 > 
-> Enabling it can give you about a 9% increase in game FPS, it reduces the activation display of all items not in the current room.
-> 
+> *  ~~(Default setting is false to disable, you can set EnableFrameRateOptimization to true in the configuration file to enable it)~~
+>
+> ~~Note: This is an experimental feature that may cause game crashes, save corruption, item loss, and other risks.~~
+>
+> ~~Enabling it can give you about a 5% increase in game FPS, by reducing the activation display of items in non-adjacent rooms.~~
+>
+> ~~3. Extreme frame rate optimization~~
+>
+> *  ~~(Default setting is false to disable, you can set EnableExtremeFrameRateOptimization to true in the configuration file to enable it)~~
+>
+> ~~Note: Only effective when the frame rate optimization option is enabled~~
+>
+> ~~Enabling it can give you about a 9% increase in game FPS, it reduces the activation display of all items not in the current room.~~
+>
 
 
 # Installation Instructions
@@ -46,19 +50,22 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > 1.允许在花园无限制的种植植物和水晶
 > *  (默认设置为true开启，可以在配置文件中设定EnableUnrestrictedPlanting为false来关闭它)
 > 
-> 2.帧数优化
-> *  (默认设置为false关闭，可以在配置文件中设定EnableFrameRateOptimization为true来开启它)
+> ~~2. 帧数优化~~
 > 
-> 注意：这是实验性的功能，它可能导致游戏崩溃、存档损坏、物品丢失等风险。
+> * 这个功能(帧数优化)已经被砍掉了，因为这个功能及其容易导致存档损坏，并且不利于跟其他插件兼容。
 > 
-> 开启它你能获得约5%的游戏FPS帧数提升，原理是减少非相邻房间物品的激活显示。
+> *  ~~(默认设置为false关闭，可以在配置文件中设定EnableFrameRateOptimization为true来开启它)~~
+> 
+> ~~注意：这是实验性的功能，它可能导致游戏崩溃、存档损坏、物品丢失等风险。~~
+> 
+> ~~开启它你能获得约5%的游戏FPS帧数提升，原理是减少非相邻房间物品的激活显示。~~
 >
-> 3.极端的帧数优化
-> *  (默认设置为false关闭，可以在配置文件中设定EnableExtremeFrameRateOptimization为true来开启它)
+> ~~3.极端的帧数优化~~
+> *  ~~(默认设置为false关闭，可以在配置文件中设定EnableExtremeFrameRateOptimization为true来开启它)~~
 > 
-> 注意：仅在帧数优化选项开启后才有效
+> ~~注意：仅在帧数优化选项开启后才有效~~
 > 
-> 开启它你能获得约9%的游戏FPS帧数提升，它减少了所有非本房间的物品的激活显示。
+> ~~开启它你能获得约9%的游戏FPS帧数提升，它减少了所有非本房间的物品的激活显示。~~
 > 
 
 

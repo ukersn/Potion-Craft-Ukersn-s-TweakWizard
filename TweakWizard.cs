@@ -41,27 +41,27 @@ namespace Ukersn_s_TweakWizard
                                                      "Turn this on, and you can now plant plants and crystals overlapping each other\n" +
                                                      "开启它，你现在可以让植物和水晶重叠在一起种植了");
 
-            // 配置项2：帧数优化功能
-            enableFrameRateOptimization = config.Bind("Performance",
-                                                      "EnableFrameRateOptimization",
-                                                      false,
-                                                      "Warning: This is an experimental option\n" +
-                                                      "Turn this on to reduce rendering of items in non-adjacent rooms, potentially improving game FPS by up to 5%\n" +
-                                                      "I haven't fully tested it yet, it might cause save corruption or item loss.\n" +
-                                                      "警告：这是一个实验选项\n" +
-                                                      "开启它，会减少非相邻房间的物品渲染，换来约5%的游戏FPS提升\n" +
-                                                      "我还没完全测试它，它可能会导致存档损坏或物品丢失。");
+            //// 配置项2：帧数优化功能
+            //enableFrameRateOptimization = config.Bind("Performance",
+            //                                          "EnableFrameRateOptimization",
+            //                                          false,
+            //                                          "Warning: This is an experimental option\n" +
+            //                                          "Turn this on to reduce rendering of items in non-adjacent rooms, potentially improving game FPS by up to 5%\n" +
+            //                                          "I haven't fully tested it yet, it might cause save corruption or item loss.\n" +
+            //                                          "警告：这是一个实验选项\n" +
+            //                                          "开启它，会减少非相邻房间的物品渲染，换来约5%的游戏FPS提升\n" +
+            //                                          "我还没完全测试它，它可能会导致存档损坏或物品丢失。");
 
-            // 配置项3：极端帧数优化功能
-            enableExtremeFrameRateOptimization = config.Bind("Performance",
-                                                             "EnableExtremeFrameRateOptimization",
-                                                             false,
-                                                             "Note: Only effective when Frame Rate Optimization is enabled\n" +
-                                                             "Turn this on to reduce rendering of items in rooms other than the current one, potentially improving game FPS by up to 9%.\n" +
-                                                             "However, when switching to other rooms, you'll see items from the previous room appear to 'vanish'.\n" +
-                                                             "注意：仅在帧数优化功能开启后才有效\n" +
-                                                             "开启它，会减少非本房间的物品渲染，换来约9%的游戏FPS提升。\n" +
-                                                             "但在切换其他房间的时候，你会看见切换前房间的物品好像'隐身'了。");
+            //// 配置项3：极端帧数优化功能
+            //enableExtremeFrameRateOptimization = config.Bind("Performance",
+            //                                                 "EnableExtremeFrameRateOptimization",
+            //                                                 false,
+            //                                                 "Note: Only effective when Frame Rate Optimization is enabled\n" +
+            //                                                 "Turn this on to reduce rendering of items in rooms other than the current one, potentially improving game FPS by up to 9%.\n" +
+            //                                                 "However, when switching to other rooms, you'll see items from the previous room appear to 'vanish'.\n" +
+            //                                                 "注意：仅在帧数优化功能开启后才有效\n" +
+            //                                                 "开启它，会减少非本房间的物品渲染，换来约9%的游戏FPS提升。\n" +
+            //                                                 "但在切换其他房间的时候，你会看见切换前房间的物品好像'隐身'了。");
 
         }
         void Awake()
@@ -100,10 +100,10 @@ namespace Ukersn_s_TweakWizard
                 GameObjectHelper.SetBuildZoneColliders(!currentBuildMode);
             }
             //帧数优化相关
-            if (enableFrameRateOptimization.Value) {
-                GameObjectHelper.GetNonAdjacentRoomsToCurrentRoom(newTargetRoom);
-                GameObjectHelper.SetAdjacentRoomsActiveAndOthersInactive(newTargetRoom, enableExtremeFrameRateOptimization.Value);
-            }
+            //if (enableFrameRateOptimization.Value) {
+            //    GameObjectHelper.GetNonAdjacentRoomsToCurrentRoom(newTargetRoom);
+            //    GameObjectHelper.SetAdjacentRoomsActiveAndOthersInactive(newTargetRoom, enableExtremeFrameRateOptimization.Value);
+            //}
 
 
         }
