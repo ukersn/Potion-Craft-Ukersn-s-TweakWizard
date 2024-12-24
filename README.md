@@ -1,6 +1,8 @@
 # Potion Craft Ukersn's Tweak Wizard
 This Mod is compatible with Potion Craft v2.0.1.2!
 
+**This plugin allows you to perform abnormal game operations, which may potentially lead to save file corruption or game crashes. Therefore, remember to backup your save files before using it.**
+
 ## Features:
 > 1. Allow unrestricted planting of plants and crystals in the garden
 > *  (Default setting is true to enable, you can set EnableUnrestrictedPlanting to false in the configuration file to disable it)
@@ -44,6 +46,7 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 # 药剂工艺 Ukersn的游戏调整优化
 此Mod适配药剂工艺v2.0.1.2版本！
 
+**这个插件会让你可以进行非正常游戏的操作，所以是有可能导致存档损坏或者游戏崩溃的，所以要记得备份存档再来使用喔**
 
 
 ## 功能: 
