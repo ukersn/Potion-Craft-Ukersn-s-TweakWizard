@@ -7,13 +7,19 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 
 > 2. Frame rate optimization
 > *  (Default setting is false to disable, you can set EnableFrameRateOptimization to true in the configuration file to enable it)
+> 
 > Note: This is an experimental feature that may cause game crashes, save corruption, item loss, and other risks.
+> 
 > Enabling it can give you about a 5% increase in game FPS, by reducing the activation display of items in non-adjacent rooms.
 >
 > 3. Extreme frame rate optimization
 > *  (Default setting is false to disable, you can set EnableExtremeFrameRateOptimization to true in the configuration file to enable it)
+> 
 > Note: Only effective when the frame rate optimization option is enabled
+> 
 > Enabling it can give you about a 9% increase in game FPS, it reduces the activation display of all items not in the current room.
+> 
+
 
 # Installation Instructions
 > * 1. Download and install [BepInEx_x64_5.4.22][0] from GitHub
@@ -42,12 +48,16 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > 
 > 2.帧数优化
 > *  (默认设置为false关闭，可以在配置文件中设定EnableFrameRateOptimization为true来开启它)
+> 
 > 注意：这是实验性的功能，它可能导致游戏崩溃、存档损坏、物品丢失等风险。
+> 
 > 开启它你能获得约5%的游戏FPS帧数提升，原理是减少非相邻房间物品的激活显示。
 >
 > 3.极端的帧数优化
 > *  (默认设置为false关闭，可以在配置文件中设定EnableExtremeFrameRateOptimization为true来开启它)
+> 
 > 注意：仅在帧数优化选项开启后才有效
+> 
 > 开启它你能获得约9%的游戏FPS帧数提升，它减少了所有非本房间的物品的激活显示。
 > 
 
