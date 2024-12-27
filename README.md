@@ -38,7 +38,7 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 
 [Auto Garden][2] : Tired of the daily routine of watering plants and harvesting vegetables? Auto Garden is here to help. It can perform all the harvesting and watering actions in your garden for you.
 
-
+[Potion Craft Game Save Error Fixer/Editor][3] : Used to fix game save errors (corrupted saves)
 
 -----
 
@@ -85,7 +85,12 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 
 [自动花园][2] : 厌倦每天日常浇花和收菜的生活了么？自动花园来了，它可以帮您完成花园中所有的收获和浇水的动作。
 
+[Potion Craft 游戏存档错误修复器/编辑器][3]  ： 用于修复游戏存档错误(坏档)
+
+
 
 [0]: https://github.com/BepInEx/BepInEx/releases
 [1]: https://github.com/ukersn/PotionCraftOpenRecipeButtonFix
 [2]: https://github.com/ukersn/PotionCraftAutoGarden
+[3]: https://github.com/ukersn/Potion-Craft-Save-File-Error-Fixer-Editor
+
