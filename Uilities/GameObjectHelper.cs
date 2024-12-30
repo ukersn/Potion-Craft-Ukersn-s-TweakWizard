@@ -417,7 +417,119 @@ namespace PotionCraftAutoGarden.Utilities
         }
 
 
+        public static void StopAllParticleSystems(bool disableParticleEffects,bool disableScratchesEffects)
+        {
+            GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
 
+            foreach (GameObject obj in allObjects)
+            {
+                if (disableParticleEffects) {
+                    ParticleSystem[] particleSystems = obj.GetComponents<ParticleSystem>();
+                    foreach (ParticleSystem ps in particleSystems)
+                    {
+                        ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        //LoggerWrapper.LogInfo($"Stopped ParticleSystem on {obj.name}");
+                    }
+
+                }
+                if (disableScratchesEffects) {
+                    // 检查并禁用 Sprite Scraches 的渲染
+                    if (obj.name == "Sprite Scraches" || obj.name == "Sprite Scratches" || obj.name == "Scratches")
+                    {
+                        SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+                        if (spriteRenderer != null)
+                        {
+                            spriteRenderer.enabled = false;
+                            //LoggerWrapper.LogInfo($"Disabled SpriteRenderer on {obj.name}");
+                        }
+                    }
+                }
+
+            }
+            //LoggerWrapper.LogInfo("All ParticleSystems have been stopped.");
+        }
+
+        public static void StopGameObjectParticleSystems(Transform transform) {
+            if (transform == null)
+            {
+                return;
+            }
+            foreach (Transform child in transform)
+            {
+                ParticleSystem[] particleSystems = child.GetComponents<ParticleSystem>();
+                foreach (ParticleSystem ps in particleSystems)
+                {
+                    if (ps.isPlaying)
+                    {
+                        ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+        public static void StopAllParticleSystemsAndDisableSpriteScraches()
+        {
+            GameObject[] rootObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+            int particleSystemsStopped = 0;
+            int spriteScrachesDisabled = 0;
+
+            foreach (GameObject rootObj in rootObjects)
+            {
+                ProcessGameObjectAndChildren(rootObj, ref particleSystemsStopped, ref spriteScrachesDisabled);
+            }
+
+            LoggerWrapper.LogInfo($"Stopped {particleSystemsStopped} ParticleSystems.");
+            LoggerWrapper.LogInfo($"Disabled {spriteScrachesDisabled} Sprite Scraches renderers.");
+        }
+
+        private static void ProcessGameObjectAndChildren(GameObject obj, ref int particleSystemsStopped, ref int spriteScrachesDisabled)
+        {
+            // 处理粒子系统
+            ParticleSystem[] particleSystems = obj.GetComponents<ParticleSystem>();
+            foreach (ParticleSystem ps in particleSystems)
+            {
+                ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                particleSystemsStopped++;
+                LoggerWrapper.LogInfo($"Stopped ParticleSystem on {obj.name}");
+            }
+
+            // 检查并禁用 Sprite Scraches 的渲染
+            if (obj.name == "Sprite Scraches")
+            {
+                SpriteRenderer spriteRenderer = obj.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null && spriteRenderer.enabled)
+                {
+                    spriteRenderer.enabled = false;
+                    spriteScrachesDisabled++;
+                    LoggerWrapper.LogInfo($"Disabled SpriteRenderer on {GetFullPath(obj)}");
+                }
+            }
+
+            // 递归处理所有子对象
+            foreach (Transform child in obj.transform)
+            {
+                ProcessGameObjectAndChildren(child.gameObject, ref particleSystemsStopped, ref spriteScrachesDisabled);
+            }
+        }
+
+        private static string GetFullPath(GameObject obj)
+        {
+            string path = obj.name;
+            Transform parent = obj.transform.parent;
+            while (parent != null)
+            {
+                path = parent.name + "/" + path;
+                parent = parent.parent;
+            }
+            return path;
+        }
 
     }
 }

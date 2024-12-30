@@ -13,23 +13,21 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 
 > * (This feature is enabled by default with 'true'. You can set EnableOneClickGrinding to 'false' in the configuration file to disable it)
 >
-> ~~3. Frame rate optimization~~
+> 3. Disable particle effects in the game
 > 
-> * This feature(Frame rate optimization) has been removed because it was highly likely to cause save file corruption and was not compatible with other plugins.
+> * (Default setting is true to enable, you can set disableParticleEffects to false in the configuration file to disable it)
 > 
-> *  ~~(Default setting is false to disable, you can set EnableFrameRateOptimization to true in the configuration file to enable it)~~
+> Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)
+> 
+> This can improve frame rate by about 10%
 >
-> ~~Note: This is an experimental feature that may cause game crashes, save corruption, item loss, and other risks.~~
+> 4. Disable scratches effects on potions and NPCs
 >
-> ~~Enabling it can give you about a 5% increase in game FPS, by reducing the activation display of items in non-adjacent rooms.~~
+> *  (Default setting is false to disable, you can set disableScratchesEffects to true in the configuration file to enable it)
 >
-> ~~4. Extreme frame rate optimization~~
->
-> *  ~~(Default setting is false to disable, you can set EnableExtremeFrameRateOptimization to true in the configuration file to enable it)~~
->
-> ~~Note: Only effective when the frame rate optimization option is enabled~~
->
-> ~~Enabling it can give you about a 9% increase in game FPS, it reduces the activation display of all items not in the current room.~~
+> Turn this on to disable Scratches effects on potions and NPCs as much as possible.
+> 
+> It might look a bit strange, but it can improve frame rate by about 3%!
 >
 
 
@@ -66,22 +64,18 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > 
 > * (默认设置为true开启，可以在配置文件中设定EnableOneClickGrinding为false来关闭它)
 >
-> ~~3. 帧数优化~~
+> 3. 关闭游戏粒子效果
 >
-> * 这个功能(帧数优化)已经被砍掉了，因为这个功能及其容易导致存档损坏，并且不利于跟其他插件兼容。
+> *  (默认设置为true开启，可以在配置文件中设定disableParticleEffects为false来关闭它)
 >
-> *  ~~(默认设置为false关闭，可以在配置文件中设定EnableFrameRateOptimization为true来开启它)~~
+> 开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）这可以提高约10%的帧数
 >
-> ~~注意：这是实验性的功能，它可能导致游戏崩溃、存档损坏、物品丢失等风险。~~
+> 4.关闭药水和NPC身上的磨损效果
+> *  (默认设置为false关闭，可以在配置文件中设定disableScratchesEffects为true来开启它)
 >
-> ~~开启它你能获得约5%的游戏FPS帧数提升，原理是减少非相邻房间物品的激活显示。~~
->
-> ~~4.极端的帧数优化~~
-> *  ~~(默认设置为false关闭，可以在配置文件中设定EnableExtremeFrameRateOptimization为true来开启它)~~
->
-> ~~注意：仅在帧数优化选项开启后才有效~~
->
-> ~~开启它你能获得约9%的游戏FPS帧数提升，它减少了所有非本房间的物品的激活显示。~~
+> 开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果
+> 
+> 看起来可能有点怪怪的，但它可以提高约3%的帧数！
 >
 
 

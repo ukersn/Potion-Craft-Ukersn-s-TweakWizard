@@ -92,6 +92,10 @@
       <HintPath>F:\SteamLibrary\steamapps\common\Potion Craft\Potion Craft_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.ParticleSystemModule">
+      <HintPath>F:\SteamLibrary\steamapps\common\Potion Craft\Potion Craft_Data\Managed\UnityEngine.ParticleSystemModule.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="UnityEngine.Physics2DModule">
       <HintPath>F:\SteamLibrary\steamapps\common\Potion Craft\Potion Craft_Data\Managed\UnityEngine.Physics2DModule.dll</HintPath>
       <Private>False</Private>

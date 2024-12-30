@@ -22,17 +22,16 @@ using Stack = PotionCraft.ObjectBased.Stack.Stack;
 using UnityEngine;
 using System.Collections;
 using PotionCraft.ObjectOptimizationSystem;
-
+using PotionCraft.ObjectBased.Garden;
 using PotionCraft.InputSystem;
-using System.CodeDom;
-using System.ComponentModel.Design.Serialization;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 using System.Threading;
-using System.Runtime.Remoting.Contexts;
+using System.Collections.Generic;
+
 
 namespace Ukersn_s_TweakWizard
 {
-    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.1.0")]
+    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.2.0")]
     public class TweakWizard : BaseUnityPlugin
     {
         private static Harmony harmony = new Harmony("com.ukersn.plugin.TweakWizard");
@@ -41,6 +40,8 @@ namespace Ukersn_s_TweakWizard
         private static bool isFirstLoaded = false;
         private static ConfigEntry<bool> enableUnrestrictedPlanting;
         private static ConfigEntry<bool> enableOneClickGrinding;
+        private static ConfigEntry<bool> disableParticleEffects;
+        private static ConfigEntry<bool> disableScratchesEffects;
 
         void Awake()
         {
@@ -64,6 +65,25 @@ namespace Ukersn_s_TweakWizard
                                                  "Hold Shift while right-clicking to send the fully ground ingredient directly into the cauldron\n" +
                                                  "开启后，在实验室中右键点击背包里的原料时，可以将其瞬间研磨至完全研磨状态（对水晶无效）\n" +
                                                  "同时按住Shift键右击可以将完全研磨的原料直接送入坩埚");
+            // 配置项3：关闭游戏粒子效果
+            disableParticleEffects = config.Bind("Performance",
+                                                      "DisableParticleEffects",
+                                                      true,
+                                                      "Disable particle effects in the game\n" +
+                                                      "Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)\n" +
+                                                      "This can improve frame rate by about 10%\n" +
+                                                      "开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）\n" +
+                                                      "这可以提高约10%的帧数");
+
+            // 配置项4：关闭药水和NPC身上的磨损效果
+            disableScratchesEffects = config.Bind("Performance",
+                                                  "DisableScratchesEffects",
+                                                  false,
+                                                  "Disable scratches effects on potions and NPCs\n" +
+                                                  "Turn this on to disable Scratches effects on potions and NPCs as much as possible\n" +
+                                                  "It might look a bit strange, but it can improve frame rate by about 3%!\n" +
+                                                  "开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果\n" +
+                                                  "看起来可能有点怪怪的，但它可以提高约3%的帧数！");
 
 
 
@@ -90,11 +110,12 @@ namespace Ukersn_s_TweakWizard
                 harmony.Patch(AccessTools.Method(typeof(RoomManager), "GoTo"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(GoToPostfix)));
             }
 
+
+
+            harmony.Patch(AccessTools.Method(typeof(RoomManager), "OnLoad"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(OnLoadPostfix)));            
             //用于一键研磨
             if (enableOneClickGrinding.Value)
             {
-                harmony.Patch(AccessTools.Method(typeof(RoomManager), "OnLoad"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(OnLoadPostfix)));
-
                 if (SmashHandler.Instance == null)
                 {
                     GameObject smashHandlerObject = new GameObject("SmashHandler");
@@ -115,18 +136,11 @@ namespace Ukersn_s_TweakWizard
         {
             //if (Keyboard.current.f3Key.wasPressedThisFrame)
             //{
-            //    SmashHandler.Instance.TrySmashWithDelay(lastStack);
+            //    //GameObjectHelper.StopAllParticleSystemsAndDisableSpriteScraches();
+            //    GameObjectHelper.StopAllParticleSystems();
             //}
 
         }
-
-
-
-
-
-
-        #region 一键研磨
-        //PotionCraft.ManagersSystem.Room.RoomManager.OnLoad() : void @06002BC7
         [HarmonyPatch(typeof(RoomManager), "OnLoad")]
         [HarmonyPostfix]
         public static void OnLoadPostfix()
@@ -136,27 +150,88 @@ namespace Ukersn_s_TweakWizard
             {
                 isFirstLoaded = true;
 
-                // 应用 IngredientTakeFromInventoryPatch
-                harmony.Patch(
+                //用于一键研磨
+                if (enableOneClickGrinding.Value)
+                {
+                    // 应用 IngredientTakeFromInventoryPatch
+                    harmony.Patch(
                     AccessTools.Method(typeof(Ingredient), "TakeFromInventory"),
                     prefix: new HarmonyMethod(typeof(IngredientTakeFromInventoryPatch), nameof(IngredientTakeFromInventoryPatch.Prefix)),
                     postfix: new HarmonyMethod(typeof(IngredientTakeFromInventoryPatch), nameof(IngredientTakeFromInventoryPatch.Postfix)));
 
-                // 应用 SpawnNewItemStackPostfix
-                harmony.Patch(
-                    AccessTools.Method(typeof(Stack), "SpawnNewItemStack"),
-                    postfix: new HarmonyMethod(typeof(TweakWizard), nameof(SpawnNewItemStackPostfix)));
+                    // 应用 SpawnNewItemStackPostfix
+                    harmony.Patch(
+                        AccessTools.Method(typeof(Stack), "SpawnNewItemStack"),
+                        postfix: new HarmonyMethod(typeof(TweakWizard), nameof(SpawnNewItemStackPostfix)));
 
-  
+                    // 应用 SpawnNewItemStackPostfix
+                    harmony.Patch(AccessTools.Method(typeof(Stack), "Smash"), prefix: new HarmonyMethod(typeof(TweakWizard), nameof(SmashPrefix)));
+                }
 
-                // 应用 SpawnNewItemStackPostfix
-                harmony.Patch(AccessTools.Method(typeof(Stack), "Smash"), prefix: new HarmonyMethod(typeof(TweakWizard), nameof(SmashPrefix)));
 
+                //用于帧数优化
+                if (disableParticleEffects.Value)
+                {
+                    harmony.Patch(AccessTools.Method(typeof(GrowthHandler), "UpdateSprite"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(UpdateSpritePostfix)));
+                }
+                //harmony.Patch(AccessTools.Method(typeof(GrowingSpotController), "OnBuildableItemFromInventoryInit"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(OnBuildableItemFromInventoryInitPostfix)));
+                //harmony.Patch(AccessTools.Method(typeof(BuildableItemFromInventoryVisualObjectController), "UpdateVisualState"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(UpdateVisualStatePostfix)));
 
+            }
+            //用于帧数优化
+            if (disableParticleEffects.Value || disableScratchesEffects.Value) {
+                GameObjectHelper.StopAllParticleSystems(disableParticleEffects.Value,disableScratchesEffects.Value);
             }
 
             //GameObjectHelper.SetAdjacentRoomsActiveAndOthersInactive(RoomIndex.Laboratory);
         }
+
+
+
+
+
+        #region 帧数优化
+        //UpdateSprite()
+
+        [HarmonyPatch(typeof(GrowthHandler), "UpdateSprite")]
+        [HarmonyPostfix]
+        public static void UpdateSpritePostfix(GrowthHandler __instance)
+        {
+            if (__instance == null) return;
+            GrowingSpotController growingSpotController = CommonUtils.GetPropertyValueS<GrowingSpotController>(__instance, "GrowingSpot");
+            Transform backgroundTransform = growingSpotController.gameObject.transform.Find("Default GrowingSpot VisualObject/Visual Object/Backround");
+            GameObjectHelper.StopGameObjectParticleSystems(backgroundTransform);
+
+
+            //ParticleAndSpriteManager.StopParticleSystemsAndDisableSprites(targetObject);
+        }
+        //[HarmonyPatch(typeof(GrowingSpotController), "OnBuildableItemFromInventoryInit")]
+        //[HarmonyPostfix]
+        //public static void OnBuildableItemFromInventoryInitPostfix(GrowingSpotController __instance)
+        //{
+        //    if (__instance == null || __instance.gameObject == null) return;
+        //    Transform backgroundTransform = __instance.gameObject.transform.Find("Default GrowingSpot VisualObject/Visual Object/Backround");
+        //    GameObjectHelper.StopGameObjectParticleSystems(backgroundTransform);
+        //}
+
+        //[HarmonyPatch(typeof(BuildableItemFromInventoryVisualObjectController), "UpdateVisualState")]
+        //[HarmonyPostfix]
+        //public static void UpdateVisualStatePostfix(BuildableItemFromInventoryVisualObjectController __instance, BuildableItemFromInventoryState value)
+        //{
+        //    if (__instance == null || __instance.gameObject == null) return;
+        //    Transform backgroundTransform = __instance.gameObject.transform.Find("Visual Object/Backround");
+        //    GameObjectHelper.StopGameObjectParticleSystems(backgroundTransform);
+        //}
+
+
+
+
+        #endregion 帧数优化
+
+
+
+        #region 一键研磨
+
 
         // 非静态上下文类 用于存储TakeFromInventory触发时相关变量
         public class TakeFromInventoryContext
