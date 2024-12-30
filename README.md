@@ -4,7 +4,7 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 **This plugin allows you to perform abnormal game operations, which may potentially lead to save file corruption or game crashes. Therefore, remember to backup your save files before using it.**
 
 ## Features:
-> 1. Allow unrestricted planting of plants and crystals in the garden
+> 1.Allow unrestricted planting of plants and crystals in the garden
 > *  (Default setting is true to enable, you can set EnableUnrestrictedPlanting to false in the configuration file to disable it)
 >
 > 2.Right-clicking on ingredients in your inventory while in the laboratory instantly grinds them to their fully ground state (this does not affect crystals). 
@@ -13,7 +13,7 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 
 > * (This feature is enabled by default with 'true'. You can set EnableOneClickGrinding to 'false' in the configuration file to disable it)
 >
-> 3. Disable particle effects in the game
+> 3.Disable particle effects in the game
 > 
 > * (Default setting is true to enable, you can set disableParticleEffects to false in the configuration file to disable it)
 > 
@@ -21,7 +21,7 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 
 > This can improve frame rate by about 10%
 >
-> 4. Disable scratches effects on potions and NPCs
+> 4.Disable scratches effects on potions and NPCs
 >
 > *  (Default setting is false to disable, you can set disableScratchesEffects to true in the configuration file to enable it)
 >
@@ -64,7 +64,7 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > 
 > * (默认设置为true开启，可以在配置文件中设定EnableOneClickGrinding为false来关闭它)
 >
-> 3. 关闭游戏粒子效果
+> 3.关闭游戏粒子效果
 >
 > *  (默认设置为true开启，可以在配置文件中设定disableParticleEffects为false来关闭它)
 >
