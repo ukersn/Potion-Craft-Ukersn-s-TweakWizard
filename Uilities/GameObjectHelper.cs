@@ -1,15 +1,20 @@
-﻿using PotionCraft.InventorySystem;
+﻿using HarmonyLib;
+using PotionCraft.InventorySystem;
 using PotionCraft.ManagersSystem.Player;
 using PotionCraft.ManagersSystem.Room;
 using PotionCraft.ObjectBased;
 using PotionCraft.ObjectBased.Garden;
 using PotionCraft.ObjectBased.Potion;
+using PotionCraft.ObjectBased.Stack;
+using PotionCraft.ScriptableObjects.BuildableInventoryItem;
 using PotionCraft.ScriptableObjects.BuildZone;
-using PotionCraft.ScriptableObjects.Room;
+using PotionCraft.ScriptableObjects.Ingredient;
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.Remoting.Contexts;
 using UnityEngine;
+using Stack = PotionCraft.ObjectBased.Stack.Stack;
 
 namespace PotionCraftAutoGarden.Utilities
 {
@@ -389,5 +394,30 @@ namespace PotionCraftAutoGarden.Utilities
                 }
             }
         }
+
+
+
+        public static bool IsStackCrystal(Stack stack)
+        {
+            if (stack == null || stack.gameObject == null) return false;
+
+            foreach (Transform child in stack.gameObject.transform)
+            {
+                // 检查子物体是否有 GrowingSpotController 组件且名称以 "Seed" 结尾
+                
+                if (child.name.EndsWith("01"))
+                {
+                    if (child.transform.childCount == 5) {
+                        return true;
+                    }
+                }
+            }
+            // 如果没有找到符合条件的子对象，返回 false
+            return false;
+        }
+
+
+
+
     }
 }

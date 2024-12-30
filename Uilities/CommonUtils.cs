@@ -65,7 +65,36 @@ namespace PotionCraftAutoGarden.Utilities
 
             return default(T);
         }
+        public static bool SetPropertyValueS(object obj, string propertyName, object value, BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty)
+        {
+            if (obj == null)
+            {
+                LoggerWrapper.LogInfo($"Object is null when trying to set property: {propertyName}");
+                return false;
+            }
 
+            Type type = obj.GetType();
+            PropertyInfo propertyInfo = type.GetProperty(propertyName, bindingFlags);
+
+            if (propertyInfo != null)
+            {
+                try
+                {
+                    propertyInfo.SetValue(obj, value, null);
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    LoggerWrapper.LogInfo($"Error setting property {propertyName}: {e.Message}");
+                }
+            }
+            else
+            {
+                LoggerWrapper.LogInfo($"Property not found: {propertyName}");
+            }
+
+            return false;
+        }
 
     }
 }

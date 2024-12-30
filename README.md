@@ -7,7 +7,13 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 1. Allow unrestricted planting of plants and crystals in the garden
 > *  (Default setting is true to enable, you can set EnableUnrestrictedPlanting to false in the configuration file to disable it)
 >
-> ~~2. Frame rate optimization~~
+> 2.Right-clicking on ingredients in your inventory while in the laboratory instantly grinds them to their fully ground state (this does not affect crystals). 
+> 
+> *  However, you can Shift + right-click to directly throw the fully ground ingredients into the cauldron (including crystals).
+> 
+> * (This feature is enabled by default with 'true'. You can set EnableOneClickGrinding to 'false' in the configuration file to disable it)
+>
+> ~~3. Frame rate optimization~~
 > 
 > * This feature(Frame rate optimization) has been removed because it was highly likely to cause save file corruption and was not compatible with other plugins.
 > 
@@ -17,7 +23,7 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 >
 > ~~Enabling it can give you about a 5% increase in game FPS, by reducing the activation display of items in non-adjacent rooms.~~
 >
-> ~~3. Extreme frame rate optimization~~
+> ~~4. Extreme frame rate optimization~~
 >
 > *  ~~(Default setting is false to disable, you can set EnableExtremeFrameRateOptimization to true in the configuration file to enable it)~~
 >
@@ -51,25 +57,32 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 
 ## 功能: 
 > 1.允许在花园无限制的种植植物和水晶
+>
 > *  (默认设置为true开启，可以在配置文件中设定EnableUnrestrictedPlanting为false来关闭它)
+>
+> 2.在实验室中右击背包中的原料时，可以将其瞬间研磨至完全研磨状态（对水晶无效）
 > 
-> ~~2. 帧数优化~~
+> * 可以通过Shift+鼠标右击直接将完全研磨状态的原料投入坩埚（包括水晶）
 > 
+> * (默认设置为true开启，可以在配置文件中设定EnableOneClickGrinding为false来关闭它)
+>
+> ~~3. 帧数优化~~
+>
 > * 这个功能(帧数优化)已经被砍掉了，因为这个功能及其容易导致存档损坏，并且不利于跟其他插件兼容。
-> 
+>
 > *  ~~(默认设置为false关闭，可以在配置文件中设定EnableFrameRateOptimization为true来开启它)~~
-> 
+>
 > ~~注意：这是实验性的功能，它可能导致游戏崩溃、存档损坏、物品丢失等风险。~~
-> 
+>
 > ~~开启它你能获得约5%的游戏FPS帧数提升，原理是减少非相邻房间物品的激活显示。~~
 >
-> ~~3.极端的帧数优化~~
+> ~~4.极端的帧数优化~~
 > *  ~~(默认设置为false关闭，可以在配置文件中设定EnableExtremeFrameRateOptimization为true来开启它)~~
-> 
+>
 > ~~注意：仅在帧数优化选项开启后才有效~~
-> 
+>
 > ~~开启它你能获得约9%的游戏FPS帧数提升，它减少了所有非本房间的物品的激活显示。~~
-> 
+>
 
 
 # 安装说明
