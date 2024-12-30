@@ -349,7 +349,7 @@ namespace Ukersn_s_TweakWizard
                 {
                     PhysicsOptimizer.EnableRigidbodySimulation(context.stack);//需要加这个才能解决bug，bug多到不如快捷键，烦死了。
                     if (!context.isStackCrystal) yield return ExecuteActionMultipleTimes(() => context.stack.Smash(),12, context.stack); //10
-                    if (context.stack != null && context.stack.substanceGrinding != null) CustomSmashLogic.SubstanceGrindingTryToGrind(context.stack.substanceGrinding);
+                    if (context.stack != null && context.stack.substanceGrinding != null && !context.isStackCrystal) CustomSmashLogic.SubstanceGrindingTryToGrind(context.stack.substanceGrinding);
                     if (context.isShiftKeyDown) {
                         context.stack.leavesGrindStatus = 1f;
                         context.stack.overallGrindStatus = 1f;
