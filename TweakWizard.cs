@@ -31,7 +31,7 @@ using System.Collections.Generic;
 
 namespace Ukersn_s_TweakWizard
 {
-    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.2.0")]
+    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.2.1")]
     public class TweakWizard : BaseUnityPlugin
     {
         private static Harmony harmony = new Harmony("com.ukersn.plugin.TweakWizard");

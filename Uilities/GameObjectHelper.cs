@@ -9,6 +9,7 @@ using PotionCraft.ObjectBased.Stack;
 using PotionCraft.ScriptableObjects.BuildableInventoryItem;
 using PotionCraft.ScriptableObjects.BuildZone;
 using PotionCraft.ScriptableObjects.Ingredient;
+using PotionCraft.ScriptableObjects.WateringPot;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -420,14 +421,15 @@ namespace PotionCraftAutoGarden.Utilities
         public static void StopAllParticleSystems(bool disableParticleEffects,bool disableScratchesEffects)
         {
             GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-
+            int wateringPotLayer = LayerMask.NameToLayer("WateringPot");
             foreach (GameObject obj in allObjects)
             {
                 if (disableParticleEffects) {
                     ParticleSystem[] particleSystems = obj.GetComponents<ParticleSystem>();
+                    
                     foreach (ParticleSystem ps in particleSystems)
                     {
-                        ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        if(obj.layer != wateringPotLayer)ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //LoggerWrapper.LogInfo($"Stopped ParticleSystem on {obj.name}");
                     }
 
