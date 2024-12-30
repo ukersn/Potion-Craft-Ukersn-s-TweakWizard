@@ -5,6 +5,7 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 
 ## Features:
 > 1.Allow unrestricted planting of plants and crystals in the garden
+> 
 > *  (Default setting is true to enable, you can set EnableUnrestrictedPlanting to false in the configuration file to disable it)
 >
 > 2.Right-clicking on ingredients in your inventory while in the laboratory instantly grinds them to their fully ground state (this does not affect crystals). 
@@ -17,17 +18,17 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 
 > * (Default setting is true to enable, you can set disableParticleEffects to false in the configuration file to disable it)
 > 
-> Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)
+> * Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)
 > 
-> This can improve frame rate by about 10%
+> * This can improve frame rate by about 10%
 >
 > 4.Disable scratches effects on potions and NPCs
 >
 > *  (Default setting is false to disable, you can set disableScratchesEffects to true in the configuration file to enable it)
 >
-> Turn this on to disable Scratches effects on potions and NPCs as much as possible.
+> * Turn this on to disable Scratches effects on potions and NPCs as much as possible.
 > 
-> It might look a bit strange, but it can improve frame rate by about 3%!
+> * It might look a bit strange, but it can improve frame rate by about 3%!
 >
 
 
@@ -68,14 +69,14 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 >
 > *  (默认设置为true开启，可以在配置文件中设定disableParticleEffects为false来关闭它)
 >
-> 开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）这可以提高约10%的帧数
+> * 开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）这可以提高约10%的帧数
 >
 > 4.关闭药水和NPC身上的磨损效果
 > *  (默认设置为false关闭，可以在配置文件中设定disableScratchesEffects为true来开启它)
 >
-> 开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果
+> * 开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果
 > 
-> 看起来可能有点怪怪的，但它可以提高约3%的帧数！
+> * 看起来可能有点怪怪的，但它可以提高约3%的帧数！
 >
 
 
