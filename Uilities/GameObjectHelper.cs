@@ -159,7 +159,7 @@ namespace PotionCraftAutoGarden.Utilities
                 seedColliders.AddRange(childColliderAddedBuildableItems);
                 buildZoneActualCollider.GetComponent<BuildZoneRoomActualCollider>().UpdateCompositeCollider(); //更新种植区域
             }
-            
+
 
             gardenRoomSeedColliders = seedColliders;
         }
@@ -283,7 +283,7 @@ namespace PotionCraftAutoGarden.Utilities
             return nonAdjacentRooms;
         }
 
-       
+
         //public static void GetAllRooms() {
 
         //    List<GameObject> roomObjects = new List<GameObject>();
@@ -319,7 +319,7 @@ namespace PotionCraftAutoGarden.Utilities
 
                 BuildableItemFromInventory buildableItemFromInventory = child.GetComponent<BuildableItemFromInventory>();
                 GrowingSpotController growingSpotController = child.GetComponent<GrowingSpotController>();
-                if (buildableItemFromInventory != null && growingSpotController !=null)
+                if (buildableItemFromInventory != null && growingSpotController != null)
                 {
                     if (buildableItemFromInventory.currentRoomBuildZoneSet != null &&
                         buildableItemFromInventory.currentRoomBuildZoneSet.room != null)
@@ -343,7 +343,7 @@ namespace PotionCraftAutoGarden.Utilities
             return items;
         }
         // 设置不相邻房间为非活跃状态
-        public static void SetAdjacentRoomsActiveAndOthersInactive(RoomIndex currentRoom ,bool extremeMode)
+        public static void SetAdjacentRoomsActiveAndOthersInactive(RoomIndex currentRoom, bool extremeMode)
         {
             //extremeMode为是否开启极端模式，为false时会保留相邻房间的物品，约5%的性能提升
             //为true时只保留本房间的物品,约9%的性能提升(但在切换其他房间的时候，你会看见切换前房间的物品好像"隐身"了)
@@ -405,7 +405,7 @@ namespace PotionCraftAutoGarden.Utilities
             foreach (Transform child in stack.gameObject.transform)
             {
                 // 检查子物体是否有 GrowingSpotController 组件且名称以 "Seed" 结尾
-                
+
                 if (child.name.EndsWith("01"))
                 {
                     if (child.transform.childCount == 5) {
@@ -418,7 +418,7 @@ namespace PotionCraftAutoGarden.Utilities
         }
 
 
-        public static void StopAllParticleSystems(bool disableParticleEffects,bool disableScratchesEffects)
+        public static void StopAllParticleSystems(bool disableParticleEffects, bool disableScratchesEffects)
         {
             GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
             int wateringPotLayer = LayerMask.NameToLayer("WateringPot");
@@ -426,10 +426,10 @@ namespace PotionCraftAutoGarden.Utilities
             {
                 if (disableParticleEffects) {
                     ParticleSystem[] particleSystems = obj.GetComponents<ParticleSystem>();
-                    
+
                     foreach (ParticleSystem ps in particleSystems)
                     {
-                        if(obj.layer != wateringPotLayer)ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        if (obj.layer != wateringPotLayer) ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         //LoggerWrapper.LogInfo($"Stopped ParticleSystem on {obj.name}");
                     }
 
@@ -531,6 +531,22 @@ namespace PotionCraftAutoGarden.Utilities
                 parent = parent.parent;
             }
             return path;
+        }
+
+
+        //药水旋涡贴边
+        private static CircleCollider2D indicatorCollider;
+
+
+        public static CircleCollider2D GetIndicatorCollider()
+        {
+            if (indicatorCollider == null) UpdateIndicatorCollider();
+            return indicatorCollider;
+        }
+        public static void UpdateIndicatorCollider()
+        {
+            indicatorCollider = GameObject.Find("Room Laboratory(Clone)/RecipeMap In Room/RecipeMapObject/Map Container/IndicatorMetaContainer/IndicatorContainer/Indicator/Collider")?.
+            GetComponent<CircleCollider2D>();
         }
 
     }

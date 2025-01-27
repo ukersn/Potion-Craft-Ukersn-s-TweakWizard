@@ -4,33 +4,66 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 **This plugin allows you to perform abnormal game operations, which may potentially lead to save file corruption or game crashes. Therefore, remember to backup your save files before using it.**
 
 ## Features:
-> 1.Allow unrestricted planting of plants and crystals in the garden
+> 1. Allow unrestricted planting of plants and crystals in the garden
 > 
 > *  (Default setting is true to enable, you can set EnableUnrestrictedPlanting to false in the configuration file to disable it)
 >
-> 2.Right-clicking on ingredients in your inventory while in the laboratory instantly grinds them to their fully ground state (this does not affect crystals). 
+> 2. Right-clicking on ingredients in your inventory while in the laboratory instantly grinds them to their fully ground state (this does not affect crystals). 
 > 
 > *  However, you can Shift + right-click to directly throw the fully ground ingredients into the cauldron (including crystals).
 > 
 > * (This feature is enabled by default with 'true'. You can set EnableOneClickGrinding to 'false' in the configuration file to disable it)
 >
-> 3.Disable particle effects in the game
+> 3. Disable particle effects in the game
 > 
-> * (Default setting is true to enable, you can set disableParticleEffects to false in the configuration file to disable it)
+> * (Default setting is true to enable, you can set DisableParticleEffects to false in the configuration file to disable it)
 > 
 > * Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)
 > 
 > * This can improve frame rate by about 10%
 >
-> 4.Disable scratches effects on potions and NPCs
+> 4. Disable scratches effects on potions and NPCs
 >
-> *  (Default setting is false to disable, you can set disableScratchesEffects to true in the configuration file to enable it)
+> *  (Default setting is false to disable, you can set DisableScratchesEffects to true in the configuration file to enable it)
 >
 > * Turn this on to disable Scratches effects on potions and NPCs as much as possible.
 > 
 > * It might look a bit strange, but it can improve frame rate by about 3%!
 >
-
+> 5. Potion edge snapping feature
+>
+> * (Default setting is false to disable, you can set EnablePotionEdgeSnapping to true in the configuration file to enable it)
+>
+> * (Default hotkey is Q, you can change it to other buttons in the PotionEdgeSnappingKey configuration in the configuration file)
+>
+> * When holding down the specified key, potions will automatically snap to the edge of the vortex when close, making positioning easier and more precise
+>
+> * The feature may become less precise or ineffective when the potion is moved too quickly.
+>
+> * It takes effect when the hotkey is pressed during operation, triggered when entering and leaving the vortex.
+>
+> * (This plugin feature is similar to the Alchemist's Assistant mod, so it's set to false by default)
+>
+> 6. Quick potion selection
+>
+> * (Default setting is true to enable, you can set EnableQuickPotionSelection to false in the configuration file to disable it)
+>
+> * Adds a new button in the regular customer and trader interface to quickly select a suitable potion from your inventory and place it on the scale
+>
+> * When providing potions to traders, it will select the cheapest potion from your inventory that meets the conditions.
+>
+> * When providing potions to regular customers, it will select the most expensive potion from your inventory that meets the requirements.
+>
+> * Displays the theoretical value of the most suitable potion for this customer on the button (may not be 100% accurate in some cases)
+> 
+> ![Example GIF](img/m1.gif)
+>
+> 7. Single effect potion quick selection
+>
+> * (Default setting is false to disable, you can set EnableSingleEffectPotionSelection to true in the configuration file to enable it)
+>
+> * The quick potion selection feature will only choose the most valuable single-effect potion, without considering multi-effect potions
+> 
 
 # Installation Instructions
 > * 1. Download and install [BepInEx_x64_5.4.22][0] from GitHub
@@ -60,9 +93,9 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > *  (默认设置为true开启，可以在配置文件中设定EnableUnrestrictedPlanting为false来关闭它)
 >
 > 2.在实验室中右击背包中的原料时，可以将其瞬间研磨至完全研磨状态（对水晶无效）
-> 
+>
 > * 可以通过Shift+鼠标右击直接将完全研磨状态的原料投入坩埚（包括水晶）
-> 
+>
 > * (默认设置为true开启，可以在配置文件中设定EnableOneClickGrinding为false来关闭它)
 >
 > 3.关闭游戏粒子效果
@@ -75,8 +108,39 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > *  (默认设置为false关闭，可以在配置文件中设定disableScratchesEffects为true来开启它)
 >
 > * 开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果
-> 
+>
 > * 看起来可能有点怪怪的，但它可以提高约3%的帧数！
+>
+> 5.药水贴边功能
+> * (默认设置为false关闭，可在配置文件中将EnablePotionEdgeSnapping 设为true来开启它)
+>
+> * (默认热键为 Q，可在配置文件中的 PotionEdgeSnappingKey 配置设置为其他按钮来更改)
+>
+> * 按住指定按键时，药水靠近旋涡边缘会自动贴边，使定位更容易和精确
+>
+> * 药水移动太快时，会使得功能不那么精准或失效。
+>
+> * 在操作时按下热键时生效，在进入旋涡和离开旋涡时触发。
+>
+> * (这个插件功能跟Alchemist's Assistant模组的功能类似，所以默认设置为false不开启它)
+>
+> 6.快速选药
+> * (默认设置为true开启，可在配置文件中将EnableQuickPotionSelection 设为false来关闭它)
+>
+> * 在普通客人和交易者界面添加新按钮，一键从背包中选出符合要求的药水并放到天平上
+>
+> * 在为交易者提供药水时，会选择背包中最便宜的符合条件的药水。
+>
+> * 在为普通客人提供药水时，会选择背包中满足需求的最贵的药水。
+>
+> * 在按钮上显示理论上最符合客人需求的药水价值（某些情况下可能不够准确）
+>
+> ![Example GIF](img/m2.gif)
+>
+> 7.单效果药水快速选择
+> * (默认设置为false关闭，可在配置文件中将 EnableSingleEffectPotionSelection 设为true来开启它)
+>
+> * 快速选药功能只选择最有价值的单一效果药水，不考虑多效果药水
 >
 
 
