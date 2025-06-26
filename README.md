@@ -14,8 +14,9 @@ This Mod is compatible with Potion Craft v2.0.2!
 > 
 > * (This feature is enabled by default with 'true'. You can set EnableOneClickGrinding to 'false' in the configuration file to disable it)
 >
-~~3.Turn off game particle effects~~(This function has been covered by the features in version 2.0.2, so it is no longer provided)
-~~4.Turn off the wear effects on potions and NPCs~~
+> ~~3.Turn off game particle effects~~(This function has been covered by the features in version 2.0.2, so it is no longer provided)
+> 
+> ~~4.Turn off the wear effects on potions and NPCs~~
 >
 > 5. Potion edge snapping feature
 >
@@ -86,6 +87,7 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 > * (默认设置为true开启，可以在配置文件中设定EnableOneClickGrinding为false来关闭它)
 >
 > ~~3.关闭游戏粒子效果~~(这个功能已经被2.0.2的功能覆盖，所以不再提供)
+> 
 > ~~4.关闭药水和NPC身上的磨损效果~~
 >
 > 5.药水贴边功能
