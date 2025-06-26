@@ -476,20 +476,20 @@ namespace PotionCraftAutoGarden.Utilities
 
 
 
-        public static void StopAllParticleSystemsAndDisableSpriteScraches()
-        {
-            GameObject[] rootObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-            int particleSystemsStopped = 0;
-            int spriteScrachesDisabled = 0;
+        //public static void StopAllParticleSystemsAndDisableSpriteScraches()
+        //{
+        //    GameObject[] rootObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        //    int particleSystemsStopped = 0;
+        //    int spriteScrachesDisabled = 0;
 
-            foreach (GameObject rootObj in rootObjects)
-            {
-                ProcessGameObjectAndChildren(rootObj, ref particleSystemsStopped, ref spriteScrachesDisabled);
-            }
+        //    foreach (GameObject rootObj in rootObjects)
+        //    {
+        //        ProcessGameObjectAndChildren(rootObj, ref particleSystemsStopped, ref spriteScrachesDisabled);
+        //    }
 
-            LoggerWrapper.LogInfo($"Stopped {particleSystemsStopped} ParticleSystems.");
-            LoggerWrapper.LogInfo($"Disabled {spriteScrachesDisabled} Sprite Scraches renderers.");
-        }
+        //    LoggerWrapper.LogInfo($"Stopped {particleSystemsStopped} ParticleSystems.");
+        //    LoggerWrapper.LogInfo($"Disabled {spriteScrachesDisabled} Sprite Scraches renderers.");
+        //}
 
         private static void ProcessGameObjectAndChildren(GameObject obj, ref int particleSystemsStopped, ref int spriteScrachesDisabled)
         {

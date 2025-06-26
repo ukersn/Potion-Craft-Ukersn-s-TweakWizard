@@ -50,7 +50,7 @@ using PotionCraft.Settings.GameDifficultySettings;
 
 namespace Ukersn_s_TweakWizard
 {
-    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.3.0")]
+    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.3.1")]
     public class TweakWizard : BaseUnityPlugin
     {
         private static Harmony harmony = new Harmony("com.ukersn.plugin.TweakWizard");
@@ -59,8 +59,8 @@ namespace Ukersn_s_TweakWizard
         private static bool isFirstLoaded = false;
         private static ConfigEntry<bool> enableUnrestrictedPlanting;
         private static ConfigEntry<bool> enableOneClickGrinding;
-        private static ConfigEntry<bool> disableParticleEffects;
-        private static ConfigEntry<bool> disableScratchesEffects;
+        //private static ConfigEntry<bool> disableParticleEffects;
+        //private static ConfigEntry<bool> disableScratchesEffects;
 
         private static ConfigEntry<bool> enablePotionEdgeSnapping;
         private static ConfigEntry<Key> potionEdgeSnappingHotkey;
@@ -92,25 +92,25 @@ namespace Ukersn_s_TweakWizard
                                                  "Hold Shift while right-clicking to send the fully ground ingredient directly into the cauldron\n" +
                                                  "开启后，在实验室中右键点击背包里的原料时，可以将其瞬间研磨至完全研磨状态（对水晶无效）\n" +
                                                  "同时按住Shift键右击可以将完全研磨的原料直接送入坩埚");
-            // 配置项3：关闭游戏粒子效果
-            disableParticleEffects = config.Bind("Performance",
-                                                      "DisableParticleEffects",
-                                                      true,
-                                                      "Disable particle effects in the game\n" +
-                                                      "Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)\n" +
-                                                      "This can improve frame rate by about 10%\n" +
-                                                      "开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）\n" +
-                                                      "这可以提高约10%的帧数");
+            //// 配置项3：关闭游戏粒子效果(在2.0.2版本中官方自己出了这个功能覆盖了我的mod功能，所以删除此功能)
+            //disableParticleEffects = config.Bind("Performance",
+            //                                          "DisableParticleEffects",
+            //                                          true,
+            //                                          "Disable particle effects in the game\n" +
+            //                                          "Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)\n" +
+            //                                          "This can improve frame rate by about 10%\n" +
+            //                                          "开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）\n" +
+            //                                          "这可以提高约10%的帧数");
 
-            // 配置项4：关闭药水和NPC身上的磨损效果
-            disableScratchesEffects = config.Bind("Performance",
-                                                  "DisableScratchesEffects",
-                                                  false,
-                                                  "Disable scratches effects on potions and NPCs\n" +
-                                                  "Turn this on to disable Scratches effects on potions and NPCs as much as possible\n" +
-                                                  "It might look a bit strange, but it can improve frame rate by about 3%!\n" +
-                                                  "开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果\n" +
-                                                  "看起来可能有点怪怪的，但它可以提高约3%的帧数！");
+            //// 配置项4：关闭药水和NPC身上的磨损效果
+            //disableScratchesEffects = config.Bind("Performance",
+            //                                      "DisableScratchesEffects",
+            //                                      false,
+            //                                      "Disable scratches effects on potions and NPCs\n" +
+            //                                      "Turn this on to disable Scratches effects on potions and NPCs as much as possible\n" +
+            //                                      "It might look a bit strange, but it can improve frame rate by about 3%!\n" +
+            //                                      "开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果\n" +
+            //                                      "看起来可能有点怪怪的，但它可以提高约3%的帧数！");
 
 
             // 新增：启用药水贴边功能的配置
@@ -289,18 +289,18 @@ namespace Ukersn_s_TweakWizard
 
 
                 //用于帧数优化
-                if (disableParticleEffects.Value)
-                {
-                    harmony.Patch(AccessTools.Method(typeof(GrowthHandler), "UpdateSprite"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(UpdateSpritePostfix)));
-                }
+                //if (disableParticleEffects.Value)
+                //{
+                //    harmony.Patch(AccessTools.Method(typeof(GrowthHandler), "UpdateSprite"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(UpdateSpritePostfix)));
+                //}
                 //harmony.Patch(AccessTools.Method(typeof(GrowingSpotController), "OnBuildableItemFromInventoryInit"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(OnBuildableItemFromInventoryInitPostfix)));
                 //harmony.Patch(AccessTools.Method(typeof(BuildableItemFromInventoryVisualObjectController), "UpdateVisualState"), postfix: new HarmonyMethod(typeof(TweakWizard), nameof(UpdateVisualStatePostfix)));
 
             }
             //用于帧数优化
-            if (disableParticleEffects.Value || disableScratchesEffects.Value) {
-                GameObjectHelper.StopAllParticleSystems(disableParticleEffects.Value,disableScratchesEffects.Value);
-            }
+            //if (disableParticleEffects.Value || disableScratchesEffects.Value) {
+            //    GameObjectHelper.StopAllParticleSystems(disableParticleEffects.Value,disableScratchesEffects.Value);
+            //}
 
 
             //GameObjectHelper.SetAdjacentRoomsActiveAndOthersInactive(RoomIndex.Laboratory);
@@ -872,7 +872,7 @@ namespace Ukersn_s_TweakWizard
             Vector3 zero = Vector3.zero;
             IItemContainer display = Scales.Instance.rightCupScript.display;
             ItemFromInventory itemFromInventory;
-            (itemFromInventory = PotionItem.SpawnNewPotion(zero, potion, inventory.itemsPanel)).SoundController.OnGrab();
+            (itemFromInventory = PotionItem.SpawnNewPotion(zero, potion, inventory.itemsPanel)).SoundController.OnGrab(null);
             if (display.ItemCanBeAccepted(itemFromInventory))
             {
                 itemFromInventory.sortingOrderSetter.SetupRenderers();
@@ -1181,21 +1181,23 @@ namespace Ukersn_s_TweakWizard
 
 
 
-        #region 帧数优化
+        //#region 帧数优化
         //UpdateSprite()
 
-        [HarmonyPatch(typeof(GrowthHandler), "UpdateSprite")]
-        [HarmonyPostfix]
-        public static void UpdateSpritePostfix(GrowthHandler __instance)
-        {
-            if (__instance == null) return;
-            GrowingSpotController growingSpotController = CommonUtils.GetPropertyValueS<GrowingSpotController>(__instance, "GrowingSpot");
-            Transform backgroundTransform = growingSpotController.gameObject.transform.Find("Default GrowingSpot VisualObject/Visual Object/Backround");
-            GameObjectHelper.StopGameObjectParticleSystems(backgroundTransform);
+        //[HarmonyPatch(typeof(GrowthHandler), "UpdateSprite")]
+        //[HarmonyPostfix]
+        //public static void UpdateSpritePostfix(GrowthHandler __instance)
+        //{
+        //    if (__instance == null) return;
+        //    GrowingSpotController growingSpotController = CommonUtils.GetPropertyValueS<GrowingSpotController>(__instance, "GrowingSpot");
+        //    Transform backgroundTransform = growingSpotController.gameObject.transform.Find("Default GrowingSpot VisualObject/Visual Object/Backround");
+        //    GameObjectHelper.StopGameObjectParticleSystems(backgroundTransform);
 
 
-            //ParticleAndSpriteManager.StopParticleSystemsAndDisableSprites(targetObject);
-        }
+        //    //ParticleAndSpriteManager.StopParticleSystemsAndDisableSprites(targetObject);
+        //}
+
+
         //[HarmonyPatch(typeof(GrowingSpotController), "OnBuildableItemFromInventoryInit")]
         //[HarmonyPostfix]
         //public static void OnBuildableItemFromInventoryInitPostfix(GrowingSpotController __instance)
@@ -1213,11 +1215,7 @@ namespace Ukersn_s_TweakWizard
         //    Transform backgroundTransform = __instance.gameObject.transform.Find("Visual Object/Backround");
         //    GameObjectHelper.StopGameObjectParticleSystems(backgroundTransform);
         //}
-
-
-
-
-        #endregion 帧数优化
+        //#endregion 帧数优化
 
 
 
@@ -1339,9 +1337,12 @@ namespace Ukersn_s_TweakWizard
                 try
                 {
                     PhysicsOptimizer.EnableRigidbodySimulation(context.stack);//需要加这个才能解决bug，bug多到不如快捷键，烦死了。
-                    if (!context.isStackCrystal) yield return ExecuteActionMultipleTimes(() => context.stack.Smash(),12, context.stack); //10
+                    if (!context.isStackCrystal) yield return ExecuteActionMultipleTimes(() => context.stack.Smash(),14, context.stack); //10
+                    //if (!context.isStackCrystal) yield return null; //10
                     if (context.stack != null && context.stack.substanceGrinding != null && !context.isStackCrystal) CustomSmashLogic.SubstanceGrindingTryToGrind(context.stack.substanceGrinding);
+
                     if (context.isShiftKeyDown) {
+                        //LoggerWrapper.LogInfo("完全研磨设定");
                         context.stack.leavesGrindStatus = 1f;
                         context.stack.overallGrindStatus = 1f;
                     }

@@ -1,5 +1,5 @@
 # Potion Craft Ukersn's Tweak Wizard
-This Mod is compatible with Potion Craft v2.0.1.2!
+This Mod is compatible with Potion Craft v2.0.2!
 
 **This plugin allows you to perform abnormal game operations, which may potentially lead to save file corruption or game crashes. Therefore, remember to backup your save files before using it.**
 
@@ -14,21 +14,8 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 > 
 > * (This feature is enabled by default with 'true'. You can set EnableOneClickGrinding to 'false' in the configuration file to disable it)
 >
-> 3. Disable particle effects in the game
-> 
-> * (Default setting is true to enable, you can set DisableParticleEffects to false in the configuration file to disable it)
-> 
-> * Turn this on to disable as many shiny effects as possible (such as crystals, decorations, etc.)
-> 
-> * This can improve frame rate by about 10%
->
-> 4. Disable scratches effects on potions and NPCs
->
-> *  (Default setting is false to disable, you can set DisableScratchesEffects to true in the configuration file to enable it)
->
-> * Turn this on to disable Scratches effects on potions and NPCs as much as possible.
-> 
-> * It might look a bit strange, but it can improve frame rate by about 3%!
+~~3.Turn off game particle effects~~(This function has been covered by the features in version 2.0.2, so it is no longer provided)
+~~4.Turn off the wear effects on potions and NPCs~~
 >
 > 5. Potion edge snapping feature
 >
@@ -72,7 +59,7 @@ This Mod is compatible with Potion Craft v2.0.1.2!
 You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Potion Craft\BepInEx\config" directory after running the game for the first time to modify the configuration.
 
 # My Other Projects
-[Recipe Book Button Fix][1]: Used to fix a bug where, after playing the game for a long time, the clickable area of the recipe book button becomes larger, overlapping other buttons.
+~~[Recipe Book Button Fix][1]: Used to fix a bug where, after playing the game for a long time, the clickable area of the recipe book button becomes larger, overlapping other buttons.~~(This bug has been fixed by the official team in version v2.0.2).
 
 [Auto Garden][2] : Tired of the daily routine of watering plants and harvesting vegetables? Auto Garden is here to help. It can perform all the harvesting and watering actions in your garden for you.
 
@@ -82,7 +69,7 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 
 
 # 药剂工艺 Ukersn的游戏调整优化
-此Mod适配药剂工艺v2.0.1.2版本！
+此Mod适配药剂工艺v2.0.2版本！
 
 **这个插件会让你可以进行非正常游戏的操作，所以是有可能导致存档损坏或者游戏崩溃的，所以要记得备份存档再来使用喔**
 
@@ -98,18 +85,8 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 >
 > * (默认设置为true开启，可以在配置文件中设定EnableOneClickGrinding为false来关闭它)
 >
-> 3.关闭游戏粒子效果
->
-> *  (默认设置为true开启，可以在配置文件中设定disableParticleEffects为false来关闭它)
->
-> * 开启后，将尽可能关闭游戏中那些金光闪闪的效果（比如水晶，装饰品等）这可以提高约10%的帧数
->
-> 4.关闭药水和NPC身上的磨损效果
-> *  (默认设置为false关闭，可以在配置文件中设定disableScratchesEffects为true来开启它)
->
-> * 开启后，将尽可能关闭游戏中在药水和NPC身上的磨损效果
->
-> * 看起来可能有点怪怪的，但它可以提高约3%的帧数！
+> ~~3.关闭游戏粒子效果~~(这个功能已经被2.0.2的功能覆盖，所以不再提供)
+> ~~4.关闭药水和NPC身上的磨损效果~~
 >
 > 5.药水贴边功能
 > * (默认设置为false关闭，可在配置文件中将EnablePotionEdgeSnapping 设为true来开启它)
@@ -153,7 +130,7 @@ You can find the configuration file com.ukersn.plugin.TweakWizard.cfg in the "Po
 你可以在第一次运行游戏后在目录"Potion Craft\BepInEx\config"中找到配置文件com.ukersn.plugin.TweakWizard.cfg来修改配置
 
 # 我的其他项目
-[配方书按钮修复][1] :用于修复游戏游玩久后配方书按钮可点击区域变大，从而覆盖其他按钮的bug
+~~[配方书按钮修复][1] :用于修复游戏游玩久后配方书按钮可点击区域变大，从而覆盖其他按钮的bug~~(这个bug已经在v2.0.2版本被官方修复)
 
 [自动花园][2] : 厌倦每天日常浇花和收菜的生活了么？自动花园来了，它可以帮您完成花园中所有的收获和浇水的动作。
 
