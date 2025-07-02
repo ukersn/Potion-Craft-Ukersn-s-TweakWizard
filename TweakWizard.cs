@@ -50,7 +50,7 @@ using PotionCraft.Settings.GameDifficultySettings;
 
 namespace Ukersn_s_TweakWizard
 {
-    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.3.1")]
+    [BepInPlugin("com.ukersn.plugin.TweakWizard", "Ukersn's TweakWizard", "1.3.2")]
     public class TweakWizard : BaseUnityPlugin
     {
         private static Harmony harmony = new Harmony("com.ukersn.plugin.TweakWizard");
@@ -283,8 +283,6 @@ namespace Ukersn_s_TweakWizard
                         AccessTools.Method(typeof(Stack), "SpawnNewItemStack"),
                         postfix: new HarmonyMethod(typeof(TweakWizard), nameof(SpawnNewItemStackPostfix)));
 
-                    // 应用 SpawnNewItemStackPostfix
-                    harmony.Patch(AccessTools.Method(typeof(Stack), "Smash"), prefix: new HarmonyMethod(typeof(TweakWizard), nameof(SmashPrefix)));
                 }
 
 
@@ -1316,11 +1314,27 @@ namespace Ukersn_s_TweakWizard
                 while (elapsedTime < 1.5f)
                 {
 
-                    
                     if (!context.stack.isFallingFromPanel)
                     {
                         //LoggerWrapper.LogInfo($"Stack {stack.name} 准备好被碾压");;
-                        StartCoroutine(SmashCom(context)); // 启动通用协程
+                        SubstanceGrinding substanceGrinding = context.stack.substanceGrinding;
+
+                        context.stack.leavesGrindStatus = 1f;
+                        context.stack.overallGrindStatus = 1f;
+                        substanceGrinding.CurrentGrindStatus = 1f;
+                        substanceGrinding.grindTicksPerformed = substanceGrinding.GrindTicksToFullGrind;
+                        context.stack.UpdateGrindedSubstance();
+                        foreach (StackItem stackItem in context.stack.itemsFromThisStack.ToList<StackItem>())
+                        {
+                            bool flag2 = stackItem.GetType() == typeof(IngredientFromStack);
+                            if (flag2)
+                            {
+                                IngredientFromStack ingredientFromStack = stackItem as IngredientFromStack;
+                                CommonUtils.SetPropertyValueS(ingredientFromStack, "IsDestroyed", true);
+                                Destroy(ingredientFromStack.gameObject);
+                                ingredientFromStack.DestroyContainerRecursively(ingredientFromStack.transform.parent);
+                            }
+                        }
                         yield break;
                     }
                     elapsedTime += 0.1f;
@@ -1330,143 +1344,7 @@ namespace Ukersn_s_TweakWizard
                 }
                 LoggerWrapper.LogInfo($"Stack {context.stack.name} 准备被碾压的时间超时，可能被收取，取消碾压。"); ;
             }
-            private IEnumerator SmashCom(TakeFromInventoryContext context)
-            {
-
-                CustomSmashLogic.BeginCustomLogic();
-                try
-                {
-                    PhysicsOptimizer.EnableRigidbodySimulation(context.stack);//需要加这个才能解决bug，bug多到不如快捷键，烦死了。
-                    if (!context.isStackCrystal) yield return ExecuteActionMultipleTimes(() => context.stack.Smash(),14, context.stack); //10
-                    //if (!context.isStackCrystal) yield return null; //10
-                    if (context.stack != null && context.stack.substanceGrinding != null && !context.isStackCrystal) CustomSmashLogic.SubstanceGrindingTryToGrind(context.stack.substanceGrinding);
-
-                    if (context.isShiftKeyDown) {
-                        //LoggerWrapper.LogInfo("完全研磨设定");
-                        context.stack.leavesGrindStatus = 1f;
-                        context.stack.overallGrindStatus = 1f;
-                    }
-
-                }
-                finally
-                {
-                    CustomSmashLogic.EndCustomLogic();
-                }
-
-
-            }
-            public IEnumerator ExecuteActionMultipleTimes(Action action, int executionCount, Stack stack = null)
-            {
-                if (stack == null)
-                {
-                    //LoggerWrapper.LogInfo($"Stack变为null，停止碾压");
-                    yield break;
-                }
-                for (int i = 0; i < executionCount; i++)
-                {
-                    action.Invoke();
-                    //yield return new WaitForSeconds(1f);
-                    yield return null;
-                }
-            }
-
-        }
-
-        [HarmonyPatch(typeof(Stack), "Smash")]
-        [HarmonyPrefix]
-        public static bool SmashPrefix(Stack __instance)
-        {
-            if (!CustomSmashLogic.UseCustomLogic)
-            {
-                // 如果不使用自定义逻辑，允许原始方法执行
-                return true;
-            }
-            //LoggerWrapper.LogInfo($"自定义的Smash  {__instance.name}  {__instance.itemsFromThisStack.Count}");
-            if (__instance == null)
-            {
-                return false;
-            }
-
-            bool flag = false;
-
-            foreach (StackItem stackItem in __instance.itemsFromThisStack.ToList<StackItem>())
-            {
-                IngredientFromStack ingredientFromStack = stackItem as IngredientFromStack;
-                if (ingredientFromStack != null)
-                {
-                    CustomSmashLogic.CustomIngredientFromStackSmash(ingredientFromStack);
-                }
-                else if (stackItem is GrindedSubstanceInPlay)
-                {
-                    flag = true;
-                }
-            }
-
-            // 保留原始方法的其余部分
-            if (__instance.vacuumingTo == Managers.Ingredient.cauldron)
-            {
-                return false;
-            }
-            Ingredient ingredient = CommonUtils.GetPropertyValueS<InventoryItem>(__instance, "InventoryItem") as Ingredient;
-            if (!flag && ingredient.effectCollision != null)
-            {
-                //屏蔽原版的成分中被研磨而爆出的粒子效果减少卡顿。
-                //__instance.visualEffectsScript.SpawnEffectsExplosion(ingredient.effectCollision, SpriteSortingLayers.BackgroundEffects);
-                return false;
-            }
-            PhysicalParticle.Behaviour behaviour = (__instance.state.Get() == StateMachine.State.InPlayZone) ? PhysicalParticle.Behaviour.PlayZone : PhysicalParticle.Behaviour.Mortar;
-            //屏蔽原版的成分中的叶子被研磨而爆出的粒子效果减少卡顿。
-            //PhysicalParticle.SpawnExplosion(__instance.transform.position, ingredient.physicalParticleType, behaviour, ingredient.grindedSubstanceColor);
-
-            return false;
-        }
-
-        public static class CustomSmashLogic
-        {
-            public static bool UseCustomLogic { get; private set; }
-            private static int activeCustomLogicCount = 0; //协程实例计数器 当其归0时才能确定所有协程实例跑完，关闭自定义方法
-
-            public static void BeginCustomLogic()
-            {
-                if (Interlocked.Increment(ref activeCustomLogicCount) == 1)
-                {
-                    UseCustomLogic = true;
-                }
-            }
-
-            public static void EndCustomLogic()
-            {
-                if (Interlocked.Decrement(ref activeCustomLogicCount) == 0)
-                {
-                    UseCustomLogic = false;
-                }
-            }
-
-            public static void CustomIngredientFromStackSmash(IngredientFromStack ingredientFromStack)
-            {
-                // 在这里实现您的自定义 Smash 逻辑
-                //LoggerWrapper.LogInfo($"自定义 Smash 方法被调用：{ingredientFromStack.name}");
-
-                Ingredient inventoryItem = (Ingredient)CommonUtils.GetPropertyValueS<InventoryItem>(ingredientFromStack.stackScript, "InventoryItem");
-
-                if (!(inventoryItem.canBeDamaged))
-                {
-                    return; // 不执行原始方法
-                }
-                // 直接调用 TryToGrind，不检查 currentGrindState
-                ingredientFromStack.TryToGrind();
-                ingredientFromStack.stackScript.UpdateGrindedSubstance();
-                //LoggerWrapper.LogInfo($"完成自定义 Smash 方法被调用：{ingredientFromStack.name}");
-            }
-
-            // Token: 0x06001B94 RID: 7060 RVA: 0x000B4D0C File Offset: 0x000B2F0C
-            public static void SubstanceGrindingTryToGrind(SubstanceGrinding substanceGrinding)
-            {
-
-                substanceGrinding.lastGrindTime = Time.time;
-                substanceGrinding.grindTicksPerformed = substanceGrinding.GrindTicksToFullGrind;
-                substanceGrinding.CurrentGrindStatus = 1f;
-            }
+          
 
         }
 
